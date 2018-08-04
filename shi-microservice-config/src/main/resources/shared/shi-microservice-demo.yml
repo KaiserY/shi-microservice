@@ -1,0 +1,39 @@
+server:
+  port: 8708
+
+spring:
+  profiles:
+    include: microservice-common,microservice-oauth-client
+  cloud:
+    stream:
+      bindings:
+        uaaInput:
+          destination: orderOutput
+          group: uaaInputGroup
+        uaaOutput:
+          destination: uaaOutput
+    task:
+      initialize:
+        enable: false
+  jpa:
+    properties:
+      hibernate:
+        custom:
+          workerId: 1
+          datacenterId: 1
+
+microservice:
+  swagger:
+    enabled: true
+    host: 127.0.0.1:8702
+    basePath: /
+    basePackage: com.kaisery.microservice.demo
+    oauth2ClientId: swagger
+    oauth2ClientSecret: swagger
+    oauth2Scope: standard
+    oauth2ScopeDescription: OAuth 2.0 标准
+    oauth2Schema: oauth2schema
+    tokenUrl: /uaa/oauth/token
+    apiInfo:
+      title: Demo 服务 API 文档
+      description: Demo 服务 API 文档

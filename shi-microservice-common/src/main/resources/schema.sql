@@ -1,0 +1,9 @@
+CREATE TABLE `biz_log` (
+	`id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id',
+	`principal` VARCHAR(64) NOT NULL COMMENT '用户名',
+	`type` VARCHAR(64) NOT NULL COMMENT '类型',
+	`timestamp` DATETIME NULL DEFAULT NULL COMMENT '创建日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='操作日志表'
+;

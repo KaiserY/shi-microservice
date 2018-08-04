@@ -1,0 +1,36 @@
+server:
+  port: 8705
+
+zipkin:
+  storage:
+    type: mysql
+    mysql:
+      host: 172.25.212.13
+      port: 3306
+      username: root
+      password: aa
+      db: zipkin
+      useSsl: false
+  collector:
+    rabbitmq:
+      uri: amqp://admin:admin@172.25.212.13:5672
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 6
+    health-check-url-path: /actuator/health
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: http://localhost:8701/eureka/
+
+management:
+  metrics.web.server.auto-time-requests: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: shi-microservice-admin
+  profiles:
+    active: local
+---
+spring:
+  profiles: local
+  cloud:
+    config:
+      uri: http://127.0.0.1:8700
+      fail-fast: true

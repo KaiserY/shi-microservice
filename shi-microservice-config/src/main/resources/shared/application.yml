@@ -1,0 +1,71 @@
+---
+spring:
+  profiles: microservice-common
+  cloud:
+    config:
+      allowOverride: true
+      overrideNone: true
+      overrideSystemProperties: false
+  datasource:
+    url: jdbc:mysql://172.25.212.13:3306/microservice?useSSL=false&sessionVariables=storage_engine=InnoDB
+    username: root
+    password: aa
+  redis:
+    url: redis://user:aa@172.25.212.13:6379
+    database: 0
+  rabbitmq:
+    host: 172.25.212.13
+    port: 5672
+    username: admin
+    password: admin
+  sleuth:
+    sampler:
+      probability: 1.0
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 6
+    health-check-url-path: /actuator/health
+  client:
+    registryFetchIntervalSeconds: 5
+    service-url:
+      defaultZone: http://127.0.0.1:8701/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+
+feign:
+  hystrix:
+    enabled: true
+
+---
+spring:
+  profiles: microservice-oauth-client
+security:
+  oauth2:
+    client:
+      access-token-uri: http://127.0.0.1:8702/uaa/oauth/token
+      client-id: server
+      client-secret: server
+      grant-type: client_credentials
+      scope: server
+    resource:
+      id: ${spring.application.name}
+      jwt:
+        key-value: 123
