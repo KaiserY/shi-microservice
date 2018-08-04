@@ -1,26 +1,27 @@
 package io.github.kaisery.shi.microservice.common.client
 
+import io.github.kaisery.shi.microservice.common.dto.UserResDto
+import io.github.kaisery.shi.microservice.common.dto.UserSignupDto
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
-import org.springframework.stereotype.Component
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 
-@FeignClient("shi-microservice-uaa", fallback = UAAFeignClientFallback::class)
+@FeignClient("shi-microservice-uaa")
 interface UAAClient {
 
   @RequestMapping(
     method = [RequestMethod.GET],
     value = ["/api/user/me"],
-    consumes = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+    produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
   )
-  fun me(): String
-}
+  fun me(): UserResDto
 
-@Component
-class UAAFeignClientFallback : UAAClient {
-
-  override fun me(): String {
-    return "me fallback"
-  }
+  @RequestMapping(
+    method = [RequestMethod.GET],
+    value = ["/api/auth/test"],
+    produces = [MediaType.APPLICATION_JSON_UTF8_VALUE]
+  )
+  fun test(@RequestBody userSignupDto: UserSignupDto): UserSignupDto
 }

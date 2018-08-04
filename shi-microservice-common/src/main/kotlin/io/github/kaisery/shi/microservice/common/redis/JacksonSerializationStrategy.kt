@@ -86,7 +86,7 @@ abstract class RoleMixIn
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS)
 abstract class AuthorityMixIn
 
-class OAuth2RequestMixIn: OAuth2Request() {
+class OAuth2RequestMixIn : OAuth2Request() {
 
   @JsonIgnore
   override fun isRefresh(): Boolean {

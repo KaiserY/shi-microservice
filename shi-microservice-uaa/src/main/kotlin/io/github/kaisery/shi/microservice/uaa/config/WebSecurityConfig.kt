@@ -28,7 +28,7 @@ class WebSecurityConfig(
     http!!
       .authorizeRequests()
       .antMatchers(*SecurityConstants.WEB_SECURITY_WHITE_LIST).permitAll()
-      .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+      .antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
       .anyRequest().authenticated()
   }
 

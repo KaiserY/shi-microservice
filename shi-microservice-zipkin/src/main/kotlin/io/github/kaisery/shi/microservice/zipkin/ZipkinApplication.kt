@@ -11,10 +11,10 @@ import zipkin.server.EnableZipkinServer
 class ZipkinApplication {
   companion object {
     init {
-        System.setProperty(
-          "java.util.logging.manager",
-          "org.apache.logging.log4j.jul.LogManager"
-        )
+      System.setProperty(
+        "java.util.logging.manager",
+        "org.apache.logging.log4j.jul.LogManager"
+      )
     }
   }
 }

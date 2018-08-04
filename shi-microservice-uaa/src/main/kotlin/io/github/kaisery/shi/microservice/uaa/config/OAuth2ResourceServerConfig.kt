@@ -22,8 +22,8 @@ class OAuth2ResourceServerConfig(
     http!!
       .authorizeRequests()
       .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-      .antMatchers("/**").permitAll()
-      .antMatchers("/api/user").authenticated()
+      .antMatchers("/api/user/**").authenticated()
+      .antMatchers("/api/**").permitAll()
       .and()
       .httpBasic().disable()
       .headers().frameOptions().disable()

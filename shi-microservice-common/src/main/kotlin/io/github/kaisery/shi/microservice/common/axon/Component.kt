@@ -15,7 +15,7 @@ class EventLogger {
   }
 }
 
-@Component
+//@Component
 class Simulator(val commandGateway: CommandGateway) : CommandLineRunner {
   override fun run(vararg args: String) {
     val orderId = UUID.randomUUID().toString()

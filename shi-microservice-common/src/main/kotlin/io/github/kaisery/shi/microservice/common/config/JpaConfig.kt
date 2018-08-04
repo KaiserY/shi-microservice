@@ -25,7 +25,5 @@ class SpringSecurityAuditorAware : AuditorAware<String> {
     return if (authentication == null || !authentication.isAuthenticated) {
       Optional.empty()
     } else Optional.of(authentication.name)
-
   }
-
 }

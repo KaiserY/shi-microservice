@@ -1,5 +1,6 @@
 package io.github.kaisery.shi.microservice.uaa.config
 
+import io.github.kaisery.shi.microservice.common.constant.OAuth2Scope
 import io.github.kaisery.shi.microservice.uaa.oauth.CustomTokenGranter
 import io.github.kaisery.shi.microservice.uaa.service.UserService
 import org.springframework.context.annotation.Configuration
@@ -34,20 +35,15 @@ class OAuth2AuthorizationServerConfig(
 
   override fun configure(clients: ClientDetailsServiceConfigurer?) {
     clients!!.inMemory()
-      .withClient("api")
-      .secret(passwordEncoder.encode("api"))
-      .authorizedGrantTypes("refresh_token", "password", "authorization_code")
-      .scopes("api")
-      .and()
       .withClient("server")
       .secret(passwordEncoder.encode("server"))
       .authorizedGrantTypes("client_credentials", "refresh_token")
-      .scopes("server")
+      .scopes(OAuth2Scope.STANDARD)
       .and()
       .withClient("custom")
       .secret(passwordEncoder.encode("custom"))
       .authorizedGrantTypes("custom", "refresh_token")
-      .scopes("custom")
+      .scopes(OAuth2Scope.CUSTOM)
   }
 
   override fun configure(security: AuthorizationServerSecurityConfigurer?) {

@@ -64,7 +64,7 @@ security:
       client-id: server
       client-secret: server
       grant-type: client_credentials
-      scope: server
+      scope: standard
     resource:
       id: ${spring.application.name}
       jwt:

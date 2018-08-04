@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.provider.token.AbstractTokenGranter
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices
 
 class CustomTokenGranter(
-  val userService: UserService,
+  private val userService: UserService,
   tokenServices: AuthorizationServerTokenServices?,
   clientDetailsService: ClientDetailsService?,
   requestFactory: OAuth2RequestFactory?,
@@ -16,7 +16,7 @@ class CustomTokenGranter(
 
   override fun getOAuth2Authentication(client: ClientDetails?, tokenRequest: TokenRequest?): OAuth2Authentication {
     val params = tokenRequest!!.requestParameters;
-    val username = params.get("username") ?: "";
+    val username = params["username"] ?: "";
 
     val user = userService.loadUserByUsername(username)
 
