@@ -1,11 +1,25 @@
+spring:
+  application:
+    name: config
+  profiles:
+    active: docker
 server:
   port: 8700
 
+---
 spring:
+  profiles: docker
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@gitlab.com:yueyang-fanqiang/shi-microservice-config.git
+
+---
+spring:
+  profiles: native
   cloud:
     config:
       server:
         native:
           search-locations: classpath:/shared
-  profiles:
-    active: native

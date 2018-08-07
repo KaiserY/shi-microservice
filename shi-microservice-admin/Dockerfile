@@ -2,6 +2,6 @@ FROM openjdk:8-jdk-alpine
 MAINTAINER KaiserY
 
 ADD ./target/shi-microservice-admin.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/shi-microservice-admin.jar"]
+CMD ["java", "-Xmx200m", "-jar", "-Dspring.profiles.active=docker", "/app/shi-microservice-admin.jar"]
 
-EXPOSE 8705
+EXPOSE 8703
