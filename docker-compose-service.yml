@@ -1,0 +1,28 @@
+version: '3'
+services:
+  mariadb:
+    image: "mariadb:10.3.8"
+    restart: always
+    ports:
+      - "8601:3306"
+    command: >
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    environment:
+      - MYSQL_ROOT_PASSWORD: aa
+  redis:
+    image: "redis:4.0.11-alpine"
+    restart: always
+    ports:
+    - "8602:6379"
+    command: >
+      --requirepass aa
+  rabbitmq:
+    image: "rabbitmq:3.7.7-management-alpine"
+    restart: always
+    ports:
+      - "8603:5672"
+      - "8604:15672"
+    environment:
+      - MYSQL_ROOT_PASSWORD: aa
+      - RABBITMQ_DEFAULT_PASS: password
