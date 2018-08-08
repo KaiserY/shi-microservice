@@ -9,7 +9,7 @@ services:
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
     environment:
-      - MYSQL_ROOT_PASSWORD: aa
+      MYSQL_ROOT_PASSWORD: aa
   redis:
     image: "redis:4.0.11-alpine"
     restart: always
@@ -24,5 +24,5 @@ services:
       - "8603:5672"
       - "8604:15672"
     environment:
-      - MYSQL_ROOT_PASSWORD: aa
-      - RABBITMQ_DEFAULT_PASS: password
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
