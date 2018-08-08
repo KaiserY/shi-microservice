@@ -1,5 +1,7 @@
 target/
 
+.gitconfig
+
 ### STS ###
 .apt_generated
 .classpath
@@ -22,3 +24,7 @@ target/
 /dist/
 /nbdist/
 /.nb-gradle/
+
+application.yml
+!shi-microservice-config/src/main/resources/application.yml
+
