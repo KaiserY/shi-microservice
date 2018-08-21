@@ -27,4 +27,4 @@ target/
 
 application.yml
 !shi-microservice-config/src/main/resources/application.yml
-
+shi-microservice-config/src/main/resources/shared-secret

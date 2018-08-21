@@ -2,7 +2,7 @@ spring:
   application:
     name: config
   profiles:
-    active: docker
+    active: native
 server:
   port: 8700
 
@@ -22,4 +22,4 @@ spring:
     config:
       server:
         native:
-          search-locations: classpath:/shared
+          search-locations: classpath:/shared-secret

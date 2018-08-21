@@ -9,6 +9,10 @@
     <name>shi-microservice-zipkin</name>
     <description>shi-microservice-zipkin</description>
 
+    <properties>
+        <jooq.version>3.11.4</jooq.version>
+    </properties>
+
     <parent>
         <groupId>io.github.kaisery</groupId>
         <artifactId>shi-microservice</artifactId>
@@ -51,7 +55,7 @@
         <dependency>
             <groupId>org.jooq</groupId>
             <artifactId>jooq</artifactId>
-            <version>3.11.3</version>
+            <version>${jooq.version}</version>
         </dependency>
     </dependencies>
 

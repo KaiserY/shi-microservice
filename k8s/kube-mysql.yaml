@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-msyql-service
+spec:
+  ports:
+  - port: 3306
+    nodePort: 31081
+  selector:
+    app: kube-mysql
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-mysql
+spec:
+  selector:
+    matchLabels:
+      app: kube-mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kube-mysql
+    spec:
+      containers:
+      - image: mariadb:10.3.8
+        name: kube-mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: aa
+        args:
+        - "--character-set-server=utf8mb4"
+        - "--collation-server=utf8mb4_unicode_ci"
+        ports:
+        - containerPort: 3306
+          name: kube-mysql
+      nodeSelector:
+        nodeType: service

@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-rabbitmq-service
+spec:
+  ports:
+  - port: 5672
+    nodePort: 31083
+    name: kube-rabbitmq
+  - port: 15672
+    nodePort: 31084
+    name: rabbitmq-admin
+  selector:
+    app: kube-rabbitmq
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-rabbitmq
+spec:
+  selector:
+    matchLabels:
+      app: kube-rabbitmq
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kube-rabbitmq
+    spec:
+      containers:
+      - image: rabbitmq:3.7.7-management-alpine
+        name: kube-rabbitmq
+        env:
+        - name: RABBITMQ_DEFAULT_USER
+          value: admin
+        - name: RABBITMQ_DEFAULT_PASS
+          value: admin
+        ports:
+        - containerPort: 5672
+          name: kube-rabbitmq
+        - containerPort: 15672
+          name: rabbitmq-admin
+      nodeSelector:
+        nodeType: service
